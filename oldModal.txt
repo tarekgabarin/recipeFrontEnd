@@ -1,0 +1,55 @@
+
+                <button type="button" className="btn btn-default" data-toggle="modal" data-target="#signInModal">Sign
+                    In
+                </button>
+
+                <div id="signInModal" className="modal fade" role="dialog">
+
+
+                    <div className="modal-dialog">
+
+                        <div className="modal-content">
+
+                            <div className="modal-header">
+
+                                <h1 className="modal-title">Sign In</h1>
+                                <button data-dismiss="modal" type="button" className="close">
+                                    &times;
+                                </button>
+                            </div>
+
+                            <div className="modal-body">
+
+                                <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+
+                                    <fieldset className="form-group">
+
+                                        <label>Email</label>
+
+                                        <input {...email} type="text" className="form-control"/>
+
+                                    </fieldset>
+
+                                    <fieldset className="form-group">
+
+                                        <label>Password</label>
+
+                                        <input {...password} type="text" className="form-control"/>
+
+                                    </fieldset>
+
+                                    <button action='submit' data-dismiss="modal" className="btn btn-primary">Sign In</button>
+
+
+                                </form>
+
+
+                            </div>
+
+
+                        </div>
+
+
+
+                    </div>
+                </div>
