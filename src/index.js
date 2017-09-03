@@ -13,10 +13,12 @@ import reducers from './reducers';
 
 import 'bootstrap/dist/css/bootstrap.css'
 
+import reduxThunk from 'redux-thunk';
+
 require('../style/style.scss');
 
 
-const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
+const createStoreWithMiddleware = applyMiddleware(reduxThunk, promise)(createStore);
 
 ReactDOM.render(
 

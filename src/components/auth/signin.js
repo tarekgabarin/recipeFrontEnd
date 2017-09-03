@@ -1,9 +1,14 @@
 import React, {Component} from 'react';
-import {reduxForm} from 'redux-form';
-import { Button, Modal, ModalBody, ModalHeader, ModalTitle, ModalFooter } from 'react-bootstrap';
+import {reduxForm, Field} from 'redux-form';
+import { Button, Modal, ModalBody, ModalHeader, ModalTitle, ModalFooter, Grid, Row } from 'react-bootstrap';
+import * as actions from '../../actions';
+import {connect} from "react-redux";
+import FormInputField from '../../components/FormInputField';
+
+///import {FieldFormControl} from'../../components/FieldFormComponent';
 
 
-class Signin extends Component {
+class _Signin extends Component {
 
 
     constructor(props) {
@@ -32,13 +37,23 @@ class Signin extends Component {
 
     handleFormSubmit({email, password}){
 
-        console.log(email, password)
+
+        this.props.dispatch(actions.logInUser({email, password}));
+
+        console.log({email, password});
+
+        // this.props.logInUser({email, password})
+
+        /// actions.logInUser({email, password});
+
 
     }
 
     render() {
 
-        const {handleSubmit, fields: {email, password}} = this.props;
+        // const {handleSubmit, fields: {email, password}} = this.props;
+
+        const { handleSubmit, pristine, reset, submitting } = this.props;
 
 
         return (
@@ -49,7 +64,7 @@ class Signin extends Component {
                     Sign In
                 </Button>
 
-                <Modal show={this.state.showModal} onHide={this.close}>
+                <Modal show={this.state.showModal} dialogClassName="login-modal" onHide={this.close}>
 
                     <ModalHeader closeButton>
 
@@ -64,23 +79,25 @@ class Signin extends Component {
 
                         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
 
-                            <fieldset className="form-group">
 
-                                <label>Email</label>
 
-                                <input {...email} type="text" className="form-control"/>
+                            <FormInputField name="email" label="email" inputProps={{type: 'email', component: 'input'}}
+                                              labelProps={{xs: 0}} inputColProps={{xs: 4}}/>
 
-                            </fieldset>
+                            <FormInputField name="password" label="password" inputProps={{type: 'password', component: 'input'}}
+                                            labelProps={{xs: 0}} inputColProps={{xs: 4}}/>
 
-                            <fieldset className="form-group">
 
-                                <label>Password</label>
+                            <Grid>
+                                <Row>
 
-                                <input {...password} type="text" className="form-control"/>
+                                    <button action='submit' onClick={this.close} className="btn btn-primary" >Log In</button>
 
-                            </fieldset>
+                                </Row>
 
-                            <button action='submit' onClick={this.close} className="btn btn-primary">Sign In</button>
+                            </Grid>
+
+
 
 
                         </form>
@@ -115,7 +132,24 @@ class Signin extends Component {
 
 }
 
+/*
+
+Signin = reduxForm({
+    form: 'logInUser'
+})(Signin);
+
+export default connect(null, actions)(Signin);
+
+ */
+
+/*
+
 export default reduxForm({
-    form: 'signin',
+
+    form: 'Signin',
     fields: ['email', 'password']
 })(Signin);
+
+    */
+
+export const Signin = reduxForm({form: 'login_info', enableReinitialize: true})(_Signin);

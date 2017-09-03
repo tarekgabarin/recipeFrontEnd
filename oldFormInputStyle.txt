@@ -1,0 +1,18 @@
+ <FormGroup controlId={name}>
+                <Col componentClass={ControlLabel} {...(labelProps || {})} >
+                    {label}
+                </Col>
+                <Col {...(inputColProps || {})}>
+                    <Field className="form-control" id={name} name={name} {...(inputProps || {})}
+                           placeholder={placeholder}>
+                        {this.props.children}
+                    </Field>
+                </Col>
+            </FormGroup>
+
+
+            <FormInputField name="email" label="email" inputProps={{type: 'email', component: 'input'}}
+                                                          labelProps={{xs: 2}} inputColProps={{xs: 10}}/>
+
+                                        <FormInputField name="password" label="password" inputProps={{type: 'password', component: 'input'}}
+                                                        labelProps={{xs: 2}} inputColProps={{xs: 10}}/>
